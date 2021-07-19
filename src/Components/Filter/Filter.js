@@ -1,8 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Input } from "./Filter.styles";
 
 export const Filter = ({ type, label, getSearchName }) => {
-  return <input type={type} onChange={getSearchName} placeholder={label} />;
+  return (
+    <>
+      <h3>Find contacts by name</h3>
+      <Input type={type} onChange={getSearchName} placeholder={label} />
+    </>
+  );
 };
 
 Filter.defaultProps = {

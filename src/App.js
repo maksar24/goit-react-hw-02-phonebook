@@ -3,6 +3,7 @@ import "./App.css";
 import { Form } from "./Components/Form/Form";
 import { ContactList } from "./Components/ContactList/ContactList";
 import { Filter } from "./Components/Filter/Filter";
+import { Wrapper } from "./App.styles";
 
 class App extends Component {
   state = {
@@ -23,7 +24,7 @@ class App extends Component {
     this.state.contacts.forEach((el) => {
       if (el.name === newContact.name) {
         this.state.contacts.splice(0, 1);
-        alert("fff");
+        alert(`${newContact.name} is already in contacts`);
       }
     });
   };
@@ -32,18 +33,29 @@ class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
+  removeContact = (id) => {
+    this.setState((prevState) => {
+      return {
+        contacts: prevState.contacts.filter((el) => el.id !== id),
+      };
+    });
+  };
+
   render() {
     const { contacts, filter } = this.state;
 
     return (
-      <div>
-        <h2>Phonebook</h2>
+      <Wrapper>
+        <h1>Phonebook</h1>
         <Form onSubmit={this.addNewContact} />
-        <h3>Contacts</h3>
-        <h3>Find contacts by name</h3>
+        <h2>Contacts</h2>
         <Filter getSearchName={this.getSearchName} label="Enter contact name" />
-        <ContactList options={contacts} searchValue={filter} />
-      </div>
+        <ContactList
+          options={contacts}
+          searchValue={filter}
+          onDelete={this.removeContact}
+        />
+      </Wrapper>
     );
   }
 }
