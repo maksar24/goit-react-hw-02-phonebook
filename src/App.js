@@ -17,16 +17,16 @@ class App extends Component {
   };
 
   addNewContact = (newContact) => {
-    this.setState(({ contacts }) => ({
-      contacts: [newContact, ...contacts],
-    }));
-
     this.state.contacts.forEach((el) => {
-      if (el.name === newContact.name) {
+      if ((el.name === newContact.name) & (el.number === newContact.number)) {
         this.state.contacts.splice(0, 1);
         alert(`${newContact.name} is already in contacts`);
       }
     });
+
+    this.setState(({ contacts }) => ({
+      contacts: [newContact, ...contacts],
+    }));
   };
 
   getSearchName = (e) => {
