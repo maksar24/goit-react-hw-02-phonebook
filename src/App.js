@@ -17,9 +17,9 @@ class App extends Component {
   };
 
   addNewContact = (newContact) => {
-    this.state.contacts.forEach((el) => {
+    this.state.contacts.forEach((el, i) => {
       if ((el.name === newContact.name) & (el.number === newContact.number)) {
-        this.state.contacts.splice(0, 1);
+        this.state.contacts.splice(i, 1);
         alert(`${newContact.name} is already in contacts`);
       }
     });
