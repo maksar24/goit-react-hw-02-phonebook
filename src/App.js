@@ -17,16 +17,15 @@ class App extends Component {
   };
 
   addNewContact = (newContact) => {
-    this.state.contacts.forEach((el, i) => {
-      if ((el.name === newContact.name) & (el.number === newContact.number)) {
-        this.state.contacts.splice(i, 1);
-        alert(`${newContact.name} is already in contacts`);
-      }
-    });
+    const similarName = this.state.contacts.map((el) => el.name);
 
-    this.setState(({ contacts }) => ({
-      contacts: [newContact, ...contacts],
-    }));
+    if (similarName.includes(newContact.name)) {
+      alert(`${newContact.name} is already in contacts`);
+    } else {
+      this.setState(({ contacts }) => ({
+        contacts: [newContact, ...contacts],
+      }));
+    }
   };
 
   getSearchName = (e) => {
